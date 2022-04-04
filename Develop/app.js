@@ -189,14 +189,10 @@ inquirer
                     if(newEmployee) {
                         chooseEmployee(employeesArr);
                     } else {
-                        employeesArr;
+                        let generatedHTML = render(employeesArr);
+
+                        writeFile(generatedHTML);
                     }
-                })
-                .then(employeesArr => {
-                    return render(employeesArr);
-                })
-                .then(generatedHtml => {
-                    return writeFile(generatedHtml);
                 })
                 .catch(err => {
                     console.log(err);
