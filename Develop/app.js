@@ -10,9 +10,194 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employeesArr = [];
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: "Please enter team manager's name.",
+            validate: nameInput => {
+                if(nameInput){
+                    return true;
+                } else {
+                    console.log('You must provide a name!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'managerId',
+            message: 'Please provide employee id number',
+            validate: eId => {
+                if(eId) {
+                    return true;
+                } else {
+                    console.log('You must provide an id number');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Please provide email address.',
+            validate: email => {
+                if(email) {
+                    return true;
+                } else { 
+                    console.log('Must provide email address!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'Please provide office number.',
+            validate: officeNum => {
+                if(officeNum) {
+                    return true;
+                } else {
+                    console.log('You must provide an office number.');
+                    return false;
+                }
+            }
+        }
+    ])
+    .then(managerInfo => {
+        // taking promise data from responses and creating an object
+        const { name, managerId, email, officeNumber } = managerInfo;
+        // creating a new Manager instance with recieved object.
+        const manager = new Manager (name, managerId, email, officeNumber);
+
+        employeesArr.push(manager);
+
+        console.log(manager);
+
+        chooseEmployee();
+    });
+
+        const chooseEmployee = () => {
+            inquirer
+                .prompt([
+                    {
+                        type: 'list',
+                        name: 'role',
+                        message: 'Which would you like to add to your team?',
+                        choices: ['engineer', 'intern']
+                    },
+                    {
+                        type: 'input',
+                        name: 'name',
+                        message: 'What is employees name?',
+                        validate: engineerName => {
+                            if(engineerName){
+                                return true;
+                            } else {
+                                console.log('Please enter employee name.')
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        type: 'input',
+                        name: 'id',
+                        message: 'Please provide employee ID number.',
+                        validate: engineerID => {
+                            if (engineerID) {
+                                return true;
+                            } else {
+                                console.log('You must provide an id number!');
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        type: 'input',
+                        name: 'email',
+                        message: 'Please provide email.',
+                        validate: engineerEmail => {
+                            if (engineerEmail) {
+                                return true;
+                            } else {
+                                console.log('Please provide email');
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        type: 'input',
+                        name: 'github',
+                        message: "What is employees's github username",
+                        when: (eRole) => eRole.role === 'engineer',
+                            validate: githubUser => {
+                            if(githubUser) {
+                                return true;
+                            } else {
+                                console.log('Please provide github username.');
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        type: 'input',
+                        name: 'school',
+                        message: "Please provide school name",
+                        when: (eRole) => eRole.role === 'intern',
+                            validate: school => {
+                                if(school) {
+                                    return true;
+                                } else {
+                                    console.log('Please provide a school');
+                                    return false;
+                                }
+                            }
+                    },
+                    {
+                        type: 'confirm',
+                        name: 'newEmployee',
+                        message: 'Would you like to add another employee to the team?',
+                        default: false
+                    }
+                ])
+                .then(userInput => {
+                    let { name, id, email, github, school, role, newEmployee } = userInput;
+                    console.log(userInput);
+                    let employee;
+
+                    if(role === 'engineer') {
+                        employee = new Engineer(name, id, email,github);
+
+                        employeesArr.push(employee);
+                        console.log(employeesArr);
+                    }
+
+                    if(role === 'intern') {
+                        employee = new Intern(name, id, email, school);
+
+                        employeesArr.push(employee);
+                        console.log(employeesArr);
+                    }
+
+                    if(newEmployee) {
+                        chooseEmployee(employeesArr);
+                    } else {
+                        return employeesArr;
+                    }
+                }) 
+            };
+                
+                    
+
+        
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
