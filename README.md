@@ -4,13 +4,9 @@
 
 This application is a team profile generator. With the use of node.js and code terminal, the user is given prompts that they must give answers to in order to generate a produce an html file that displays a teams basic information.
 
-##  Future Development
+## Usage
 
-In future development of this application I would like to finish the functioonality of the overall application. This application is still in its beginning stages and has to be developed more.
-
-##  Usage 
-
-The application will need to be accessed through the use of node.js to generate your HTML.
+The application will need to be accessed through the use of node.js to generate your HTML. to invoke app type 'node app' in terminal.
 
 ## Contributors
 
@@ -19,10 +15,16 @@ Starter code was provided by class instructor Kevin Ferguson.
 ## Installation
 
 You must download the application code from the repository and clone it to your local machine.
-After the code has been cloned to your machine, you can then type 'npm install' in the "Develop" directory 
+After the code has been cloned to your machine, you can then type 'npm install' in the "Develop" directory
 of that repository to have access to the dependencies for this application to work.
 
+## Other
+
+The sample html file is located in the output folder. You can view it prior to invoking the app yourself; otherwise the file will be overwritten with your input info.
+
 ## Links
+
+[Link to Demo Video](https://drive.google.com/file/d/1QGo4vdCSXHu2yRj9oAALYi95lCaoP7dh/view?usp=sharing)
 
 [Link to Application Repository](https://github.com/ArmondR/team-profile-generator)
 
@@ -30,10 +32,11 @@ of that repository to have access to the dependencies for this application to wo
 
 ![TDD passed](test-pass.png)
 
+![sample image](app-sample.png)
 
 ### License
 
-______
+---
 
 MIT License
 
@@ -59,9 +62,6 @@ SOFTWARE.
 
 ### Badges
 
-____
+---
 
 ![](https://img.shields.io/badge/license-MIT-green)
-
-
-    
